@@ -29,7 +29,14 @@ class CityResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('state_id')
+                    ->relationship(name: 'state', titleAttribute: 'name')
+                    ->searchable()
+                    ->native(true)
+                    ->preload()
+                    ->required(),
+                Forms\Components\TextInput::make('name')
+                    ->required(),
             ]);
     }
 
@@ -37,6 +44,11 @@ class CityResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('state_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

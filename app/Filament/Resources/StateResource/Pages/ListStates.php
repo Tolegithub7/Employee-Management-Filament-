@@ -17,9 +17,3 @@ class ListStates extends ListRecords
         ];
     }
 }
-
-
-// class ListStates extends ListRecords
-// {
-//     protected static string $resource = \App\Filament\Resources\StateResource::class;
-// }

@@ -28,8 +28,23 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
+                'danger' => Color::Red,
+                'gray' => Color::Gray,
+                'info' => Color::Blue,
                 'primary' => Color::Amber,
+                'success' => Color::Emerald,
+                'warning' => Color::Orange,
+                'secondary' => Color::Indigo,
+                'slate' => Color::Slate,
             ])
+            ->brandLogo(function () {
+                return view('filament.custom-logo', [
+                    'logoUrl' => asset('images/logo2.png'),
+                    'logoHeight' => '4rem',
+                ]);
+            })
+            ->favicon(asset('images/favicon_io/favicon.ico'))
+            ->font('Croissant One')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
