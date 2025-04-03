@@ -10,16 +10,7 @@ use App\Models\Department;
 
 class Employee extends Model
 {
-    protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'address',
-        'country_id',
-        'state_id',
-        'city_id',
-        'department_id',
-    ];
+    protected $guarded = [];
 
     public function country()
     {

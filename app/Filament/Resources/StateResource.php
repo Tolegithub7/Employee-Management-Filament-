@@ -40,11 +40,17 @@ class StateResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('country_id')
+                Tables\Columns\TextColumn::make('country.name')
                     ->numeric()
+                    ->searchable()
+                    // ->searchable(isIndividual: true)
+                    // ->label("Country Name")
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->sortable()
+                    ->label("State Name")
                     ->searchable(),
+                    // ->visible(!auth()->user()->email === 'admin@example.com'), or can use hidden !
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -53,11 +59,13 @@ class StateResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ])->defaultSort('country.name')
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
+                // Tables\Actions\DeleteAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
