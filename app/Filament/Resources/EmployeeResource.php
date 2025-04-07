@@ -38,9 +38,10 @@ class EmployeeResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'first_name';
 
+
     public static function getGlobalSearchResultTitle(Model $record): string
     {
-        return $record->last_name;
+        return $record->first_name . ' ' . $record->last_name;
     }
 
     public static function getGloballySearchableAttributes(): array
@@ -51,7 +52,8 @@ class EmployeeResource extends Resource
     public static function getGlobalSearchResultDetails(Model $record): array
     {
         return [
-            'Country' => $record->country->name
+            'Country' => $record->country->name,
+            'Depart' => $record->department->name,
         ];
     }
 

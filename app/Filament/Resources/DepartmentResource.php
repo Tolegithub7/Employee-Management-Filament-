@@ -24,6 +24,41 @@ class DepartmentResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
     protected static ?string $navigationGroup = 'System Management';
     protected static ?int $navigationSort = 4;
+    protected static ?string $recordTitleAttribute = 'name';
+
+
+    public static function getGlobalSearchResultTitle(Model $record): string
+    {
+        return $record->name;
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name'];
+    }
+
+    // public static function getGlobalSearchResultDetails(Model $record): array
+    // {
+    //     return [
+    //         'User' => $record->user->name,
+    //         'Depart' => $record->department->name,
+    //     ];
+    // }
+
+    // public static function getGlobalSearchEloquentQuery(): Builder
+    // {
+    //     return parent::getGlobalSearchEloquentQuery()->with(['country']);
+    // }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return static::getModel()::count() > 10 ? 'warning' : 'success';
+    }
 
     public static function form(Form $form): Form
     {

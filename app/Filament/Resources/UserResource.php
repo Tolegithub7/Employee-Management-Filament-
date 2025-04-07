@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
@@ -19,7 +20,31 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-c-user-group';
     protected static ?string $navigationGroup = 'User Management';
+    protected static?string $recordTitleAttribute = 'name';
+    public static function getGlobalSearchResultTitle(Model $record): string
+    {
+        return $record->name;
+    }
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'email'];
+    }
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        return [
+            'Name' => $record->name,
+            'Email' => $record->email,
+        ];
+    }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return static::getModel()::count() > 10 ? 'warning' : 'success';
+    }
     public static function form(Form $form): Form
     {
         return $form
