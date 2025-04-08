@@ -18,7 +18,7 @@ class EditEmployee extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
-    protected function getCreatedNotification(): ?Notification
+    protected function getSavedNotification(): ?Notification
     {
         return Notification::make()
             ->title('Employee Edited')

@@ -10,10 +10,10 @@ use Filament\Notifications\Notification;
 class CreateEmployee extends CreateRecord
 {
     protected static string $resource = EmployeeResource::class;
-    protected function getCreatedNotificationTitle(): ?string
-    {
-        return 'Employee Created';
-    }
+    // protected function getCreatedNotificationTitle(): ?string
+    // {
+    //     return 'Employee Created';
+    // }
     protected function getCreatedNotification(): ?Notification
     {
         return Notification::make()
