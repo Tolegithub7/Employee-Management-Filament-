@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
 use App\Models\Department;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Employee extends Model
 {
@@ -30,5 +31,10 @@ class Employee extends Model
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class);
     }
 }
