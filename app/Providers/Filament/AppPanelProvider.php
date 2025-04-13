@@ -17,6 +17,10 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Models\Team;
+use Filament\Pages\Auth\Register;
+use App\Filament\App\Pages\Tenancy\EditTeamProfile;
+use App\Filament\App\Pages\Tenancy\RegisterTeam;
 
 class AppPanelProvider extends PanelProvider
 {
@@ -25,6 +29,7 @@ class AppPanelProvider extends PanelProvider
         return $panel
             ->id('app')
             ->path('app')
+            ->login()
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -51,6 +56,9 @@ class AppPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->tenant(Team::class, ownershipRelationship: 'team', slugAttribute: 'slug')
+            ->tenantRegistration(RegisterTeam::class)
+            ->tenantProfile(EditTeamProfile::class);
     }
 }

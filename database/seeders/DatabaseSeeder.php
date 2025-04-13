@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
             StateSeeder::class,
             CitySeeder::class,
         ]);
-        Department::create([
-            'name' => 'Laravel'
-        ]);
+        // Department::create([
+        //     'name' => 'Laravel'
+        // ]);
     }
 }
