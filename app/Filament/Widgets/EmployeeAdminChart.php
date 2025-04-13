@@ -11,6 +11,7 @@ class EmployeeAdminChart extends ChartWidget
 {
     protected static ?string $heading = 'Employees Chart';
     protected static string $color = 'info';
+    protected static ?int $sort = 3;
 
 
     protected function getData(): array
@@ -36,6 +37,6 @@ class EmployeeAdminChart extends ChartWidget
 
     protected function getType(): string
     {
-        return 'bar';
+        return 'line';
     }
 }

@@ -1,20 +1,23 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\App\Widgets;
 
+use App\Models\Employee;
+use Filament\Facades\Filament;
 use Filament\Widgets\ChartWidget;
-use App\Models\User;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 
-class UserAdminChart extends ChartWidget
+class EmployeeAppChart extends ChartWidget
 {
-    protected static ?string $heading = 'Users Chart';
-    protected static ?int $sort = 2;
+    protected static ?string $heading = 'Employees Chart';
+    protected static string $color = 'info';
+    protected static ?int $sort = 3;
+
 
     protected function getData(): array
     {
-        $data = Trend::model(User::class)
+        $data = Trend::query(Employee::query()->whereBelongsTo(Filament::getTenant()))
             ->between(
                 start: now()->startOfMonth(),
                 end: now()->endOfMonth(),
@@ -25,7 +28,7 @@ class UserAdminChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Users',
+                    'label' => 'Employees',
                     'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
                 ],
             ],
@@ -35,6 +38,6 @@ class UserAdminChart extends ChartWidget
 
     protected function getType(): string
     {
-        return 'bar';
+        return 'line';
     }
 }
