@@ -10,7 +10,7 @@ class Team extends Model
 {
     protected $fillable =  ['name', 'slug'];
 
-    public function employee(): HasMany
+    public function employees(): HasMany
     {
         return $this->hasMany(Employee::class);
     }
