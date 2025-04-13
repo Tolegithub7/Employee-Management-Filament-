@@ -20,6 +20,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Models\Team;
 use App\Filament\App\Pages\Tenancy\EditTeamProfile;
 use App\Filament\App\Pages\Tenancy\RegisterTeam;
+use App\Http\Middleware\VerifyIsAdmin;
 use Filament\Navigation\MenuItem;
 
 
@@ -79,9 +80,10 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-            ])  
-            ->tenant(Team::class, ownershipRelationship: 'team', slugAttribute: 'slug')
-            ->tenantRegistration(RegisterTeam::class)
-            ->tenantProfile(EditTeamProfile::class);
+                VerifyIsAdmin::class,
+            ]);
+            // ->tenant(Team::class, ownershipRelationship: 'team', slugAttribute: 'slug')
+            // ->tenantRegistration(RegisterTeam::class)
+            // ->tenantProfile(EditTeamProfile::class);
     }
 }

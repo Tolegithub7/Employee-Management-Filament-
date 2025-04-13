@@ -22,6 +22,7 @@ use Filament\Pages\Auth\Register;
 use App\Filament\App\Pages\Tenancy\EditTeamProfile;
 use App\Filament\App\Pages\Tenancy\RegisterTeam;
 use Filament\Navigation\MenuItem;
+use Illuminate\Container\Attributes\Auth;
 
 class AppPanelProvider extends PanelProvider
 {
@@ -39,6 +40,7 @@ class AppPanelProvider extends PanelProvider
                     ->label('Admin')
                     ->icon('heroicon-o-cog-6-tooth')
                     ->url('/admin')
+                    ->visible(fn (): bool => auth()->user()->is_admin)
             ])
             ->colors([
                 'primary' => Color::Amber,
